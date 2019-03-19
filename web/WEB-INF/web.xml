@@ -12,7 +12,7 @@
 
 	<servlet-mapping>
 		<servlet-name>servletUsarios</servlet-name>
-		<url-pattern>/servletUsarios</url-pattern>
+		<url-pattern>/controlador/servletUsarios</url-pattern>
 	</servlet-mapping>
 
     

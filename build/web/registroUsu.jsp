@@ -9,9 +9,46 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>Register</title>
     </head>
     <body>
-        <h1>Hello World!</h1>
+        <form name="loginform" method="post" action="servletUsarios">
+        <br><br>
+        <table align="center"><tr><td><h2>Registro usuarios</h2></td></tr></table>
+        <table width="300px" align="center" style="border:1px solid #000000;background-color:#efefef;">
+            <tr><td colspan=2></td></tr>
+            <tr><td colspan=2>&nbsp;</td></tr>
+            <tr>
+                <td><b>Nombre</b></td>
+                <td><input type="text" name="name" ></td>
+            </tr>
+            <tr>
+                <td><b>Apellidos</b></td>
+                <td><input type="text" name="surname"></td>
+            </tr>
+            <tr>
+                <td><b>Correo electrónico</b></td>
+                <td><input type="text" name="email"></td>
+            </tr>
+            <tr>
+                <td><b>Nombre usuario</b></td>
+                <td><input type="text" name="username"></td>
+            </tr>
+            <tr>
+                <td><b>Contrasena</b></td>
+                <td><input type="password" name="password"></td>
+            </tr>
+            <tr>
+                <td><b>Repetir contrasena</b></td>
+                <td><input type="password" name="password_repeat"></td>
+            </tr>
+
+            <tr>
+                <td></td>
+                <td><input type="submit" name="Register" value="Registrar usuario"></td>
+            </tr>
+            
+            <tr><td colspan=2>&nbsp;</td></tr>
+        </table> 
     </body>
 </html>
