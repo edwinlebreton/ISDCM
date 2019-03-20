@@ -58,6 +58,50 @@ public class servletUsarios extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
+        String action = request.getParameter("action");
+        if("login".equals(action)){
+            String username = request.getParameter("username");
+            String password = request.getParameter("password");
+            String message = null;
+        
+            Usuario usr = logInUser(username, password);
+            
+                if(usr == null){
+                    message="fail";
+                }
+                else{
+                    message="success";
+                    request.getRequestDispatcher("/listadoVid.jsp").forward(request, response); 
+                }
+            request.setAttribute("message", message);
+            request.getRequestDispatcher("/login.jsp").forward(request, response); 
+        }
+        if("Registrar".equals(action)){
+            String name = request.getParameter("name");
+            String surname = request.getParameter("surname");
+            String email = request.getParameter("email");
+            String username = request.getParameter("username");
+            String password = request.getParameter("password");
+            String repeatPassword = request.getParameter("repeatPassword");
+            Usuario usr = new Usuario(username, name, surname, email, password);
+            if(name.equals("")|| surname.equals("") || email.equals("")
+                    || username.equals("") || password.equals("") 
+                    || repeatPassword.equals("")){
+                request.setAttribute("message", "missing fields");
+                request.getRequestDispatcher("/registroUsu.jsp").forward(request, response);
+            }
+            if(!password.equals(repeatPassword)){
+                request.setAttribute("message", "wrong password");
+                request.getRequestDispatcher("/registroUsu.jsp").forward(request, response); 
+            }
+            else{
+                usr.addUser();
+                request.setAttribute("message", "Estas registrado ! "
+                        + "Ahora, puedes iniciar session");
+                request.getRequestDispatcher("/login.jsp").forward(request, response); 
+            }
+            response.sendRedirect("registroUsu.jsp");
+        }
     }
     
     private Usuario logInUser(String username, String password) {
@@ -81,6 +125,7 @@ public class servletUsarios extends HttpServlet {
                 user.setNombreUsuario(rs.getString("username"));
                 user.setContrasena(rs.getString("password"));
                 
+                pstmt.close();
                 return user;
             }
         } catch (SQLException e) {
@@ -103,22 +148,6 @@ public class servletUsarios extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
-        
-        String username = request.getParameter("username");
-        String password = request.getParameter("password");
-        String message = null;
-        
-        
-        Usuario usr = logInUser(username, password);
-            
-            if(usr == null){
-                message="fail";
-            }
-            else
-                message="success";
-        request.setAttribute("message", message);
-        request.getRequestDispatcher("/login.jsp").forward(request, response);    
-        
     }
 
     /**

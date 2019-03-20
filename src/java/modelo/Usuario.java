@@ -5,6 +5,12 @@
  */
 package modelo;
 
+import conexion.JdbcDerbyConnection;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
 /**
  *
  * @author edwinlebreton
@@ -15,47 +21,67 @@ public class Usuario {
     * Attributes
     */
     
-    private String nombre;
-    private String apellidos;
+    private String name;
+    private String surname;
     private String email;
-    private String nombre_usario;
-    private String contrasena;
+    private String username;
+    private String password;
     
     public Usuario() {
     }
     
-    public Usuario(String nombre_usario, String nombre, String apellidos,
-            String email, String contrasena) {
-        
-        this.nombre_usario = nombre_usario;
-        this.nombre = nombre;
-        this.apellidos = apellidos;
+    public Usuario(String username, String name, String surname,
+            String email, String password) {
+        this.username = username;
+        this.name = name;
+        this.surname = surname;
         this.email = email;
-        this.contrasena = contrasena;
+        this.password = password;
+    }
+    
+    public boolean addUser(){
+        Connection connection = JdbcDerbyConnection.ConexionDB();
+        
+        String sql = "INSERT INTO USERS VALUES (?, ?, ?, ?, ?)";
+ 
+        try (PreparedStatement pstmt = connection.prepareStatement(sql)) {
+                pstmt.setString(1, this.username);
+                pstmt.setString(2, this.password);
+                pstmt.setString(3, this.name);
+                pstmt.setString(4, this.surname);
+                pstmt.setString(5, this.email);
+                pstmt.executeUpdate();
+                pstmt.close();
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            return false;
+        }
+        
+        return true;
     }
     
     public String getNombre(){
-        return nombre;
+        return name;
     }
     
-    public void setNombre(String nombre){
-        this.nombre = nombre;
+    public void setNombre(String name){
+        this.name = name;
     }
     
     public String getNombreUsuario(){
-        return nombre_usario;
+        return username;
     }
     
-    public void setNombreUsuario(String nombre){
-        this.nombre_usario = nombre;
+    public void setNombreUsuario(String username){
+        this.username = username;
     }
     
     public String getApellidos(){
-        return apellidos;
+        return surname;
     }
     
-    public void setApellidos(String apellidos){
-        this.apellidos = apellidos;
+    public void setApellidos(String surname){
+        this.surname = surname;
     }
     
     public String getEmail(){
@@ -67,11 +93,11 @@ public class Usuario {
     }
     
     public String getContrasena(){
-        return contrasena;
+        return password;
     }
     
-    public void setContrasena(String contrasena){
-        this.contrasena = contrasena;
+    public void setContrasena(String password){
+        this.password = password;
     }
     
 }

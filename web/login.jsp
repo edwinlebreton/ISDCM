@@ -14,14 +14,14 @@
     </head>
     <body>
   
-        <form name="loginform" method="post" action="servletUsarios">
+        <form name="loginform" action="servletUsarios">
         <br><br>
         <table align="center"><tr><td><h2>Login Authentication</h2></td></tr></table>
         <table width="300px" align="center" style="border:1px solid #000000;background-color:#efefef;">
             <tr><td colspan=2></td></tr>
             <tr><td colspan=2>&nbsp;</td></tr>
             <tr>
-                <td><b>Login Name</b></td>
+                <td><b>Nombre de usuario</b></td>
                 <td><input type="text" name="username" ></td>
             </tr>
             <tr>
@@ -31,7 +31,7 @@
 
             <tr>
                 <td></td>
-                <td><input type="submit" name="Login" value="Login"></td>
+                <td><input type="submit" name="action" value="login"></td>
             </tr>
             
             <tr>

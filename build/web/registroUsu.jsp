@@ -12,7 +12,7 @@
         <title>Register</title>
     </head>
     <body>
-        <form name="loginform" method="post" action="servletUsarios">
+        <form name="loginform" method="get" action="servletUsarios">
         <br><br>
         <table align="center"><tr><td><h2>Registro usuarios</h2></td></tr></table>
         <table width="300px" align="center" style="border:1px solid #000000;background-color:#efefef;">
@@ -40,15 +40,18 @@
             </tr>
             <tr>
                 <td><b>Repetir contrasena</b></td>
-                <td><input type="password" name="password_repeat"></td>
+                <td><input type="password" name="repeatPassword"></td>
             </tr>
 
             <tr>
                 <td></td>
-                <td><input type="submit" name="Register" value="Registrar usuario"></td>
+                <td><input type="submit" name="action" value="Registrar"></td>
             </tr>
             
             <tr><td colspan=2>&nbsp;</td></tr>
         </table> 
+        <c:if test="${not empty message}">
+            <h1>${message}</h1>
+        </c:if>
     </body>
 </html>
