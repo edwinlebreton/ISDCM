@@ -7,11 +7,15 @@ package controlador;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.Date;
+import java.sql.Time;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import modelo.Usuario;
+import modelo.Video;
 
 /**
  *
@@ -31,19 +35,6 @@ public class servletRegistroVid extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet servletRegistroVid</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet servletRegistroVid at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
-        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -59,6 +50,17 @@ public class servletRegistroVid extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
+        int id = Integer.parseInt(request.getParameter("id"));
+        String title = request.getParameter("title");
+        String author = request.getParameter("author");
+        //Date date = request.getParameter("date");
+        //Time duration = request.getParameter("duration");
+        int reproductions = Integer.parseInt(request.getParameter("reproductions"));
+        String description = request.getParameter("description");
+        String format = request.getParameter("format");
+        Video video = new Video(id, title, author, reproductions, description, format);
+        video.addVideo();
+        request.getRequestDispatcher("/listadoVid.jsp").forward(request, response); 
     }
 
     /**
