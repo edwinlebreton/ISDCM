@@ -31,7 +31,7 @@
       <input type="text" placeholder="Nombre de usuario" class="form-control" name="username">
       <input type="password" placeholder="Contraseña" class="form-control" name="password">
       <input type="password" placeholder="Repetir contraseña" class="form-control" name="repeatPassword">
-      <button type="submit" name="action" value="Login">Registrar</button>
+      <button type="submit" name="action" value="Login">Registrar usuario</button>
       <p class="message">¿Ya registrado? <a href="login.jsp">Iniciar Sesión</a></p>
     </form>
   </div>

@@ -7,44 +7,33 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
-<html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-        <title>Login</title>
-    </head>
-    <body>
-  
-        <form name="loginform" action="servletUsarios">
-        <br><br>
-        <table align="center"><tr><td><h2>Login Authentication</h2></td></tr></table>
-        <table width="300px" align="center" style="border:1px solid #000000;background-color:#efefef;">
-            <tr><td colspan=2></td></tr>
-            <tr><td colspan=2>&nbsp;</td></tr>
-            <tr>
-                <td><b>Nombre de usuario</b></td>
-                <td><input type="text" name="username" ></td>
-            </tr>
-            <tr>
-                <td><b>Password</b></td>
-                <td><input type="password" name="password"></td>
-            </tr>
+<html lang="en" >
 
-            <tr>
-                <td></td>
-                <td><input type="submit" name="action" value="login"></td>
-            </tr>
-            
-            <tr>
-                <td></td>
-                <td><input type="button" name="Register" value="Register" 
-                           onclick="window.location.href='registroUsu.jsp';"/></td>
-            </tr>
-            
-            <tr><td colspan=2>&nbsp;</td></tr>
-        </table>   
-            
-        <c:if test="${not empty message}">
-            <h1>${message}</h1>
-        </c:if>
-    </body>
+<head>
+  <meta charset="UTF-8">
+  <title>Login ISDCM Videos</title>
+  
+    
+      <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+      <link rel="stylesheet" href="css/style.css">
+
+  
+</head>
+
+<body>
+  <div class="login-page">
+  <div class="form">
+    <form name="login_form" class="login-form" action="servletUsarios">
+    <h1 align="center">ISDCM Videos</h1>
+      <input type="text" placeholder="Nombre de usuario"  name="username" >
+      <input type="password" placeholder="Contraseña" name="password">
+      <button type="submit" name="action" value="Login">Iniciar Sesión</button>
+      <p class="message">¿No registrado? <a href="registroUsu.jsp">Crear una cuenta</a></p>
+    </form>
+  </div>
+</div>
+
+
+</body>
+
 </html>

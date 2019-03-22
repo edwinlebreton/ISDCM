@@ -50,17 +50,20 @@ public class servletRegistroVid extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
-        int id = Integer.parseInt(request.getParameter("id"));
-        String title = request.getParameter("title");
-        String author = request.getParameter("author");
+        String action = request.getParameter("action");
+        if("registrarVid".equals(action)){
+            int id = Integer.parseInt(request.getParameter("id"));
+            String title = request.getParameter("title");
+            String author = request.getParameter("author");
         //Date date = request.getParameter("date");
         //Time duration = request.getParameter("duration");
-        int reproductions = Integer.parseInt(request.getParameter("reproductions"));
-        String description = request.getParameter("description");
-        String format = request.getParameter("format");
-        Video video = new Video(id, title, author, reproductions, description, format);
-        video.addVideo();
-        request.getRequestDispatcher("/listadoVid.jsp").forward(request, response); 
+            int reproductions = Integer.parseInt(request.getParameter("reproductions"));
+            String description = request.getParameter("description");
+            String format = request.getParameter("format");
+            Video video = new Video(id, title, author, reproductions, description, format);
+            video.addVideo();
+            request.getRequestDispatcher("/listadoVid.jsp").forward(request, response); 
+        }
     }
 
     /**

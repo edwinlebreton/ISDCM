@@ -59,24 +59,26 @@ public class servletUsarios extends HttpServlet {
             throws ServletException, IOException {
         processRequest(request, response);
         String action = request.getParameter("action");
-        if("login".equals(action)){
+        if("Login".equals(action)){
             String username = request.getParameter("username");
             String password = request.getParameter("password");
             String message = null;
-        
-            Usuario usr = logInUser(username, password);
+            System.out.println(username+" "+password);
+            Usuario usr = new Usuario(username, password);
             
-                if(usr == null){
-                    message="fail";
-                }
-                else{
+            if(usr.exists()){
                     message="success";
-                    request.getRequestDispatcher("/listadoVid.jsp").forward(request, response); 
-                }
-            request.setAttribute("message", message);
-            request.getRequestDispatcher("/login.jsp").forward(request, response); 
+                    System.out.println(message);
+                    request.getRequestDispatcher("listadoVid.jsp").forward(request, response); 
+            }
+            else{
+                   message="fail";
+                   System.out.println(message);
+                   request.setAttribute("message", message);
+                   request.getRequestDispatcher("/login.jsp").forward(request, response); 
+            }
         }
-        if("Registrar".equals(action)){
+        else if("Registrar".equals(action)){
             String name = request.getParameter("name");
             String surname = request.getParameter("surname");
             String email = request.getParameter("email");
@@ -96,44 +98,11 @@ public class servletUsarios extends HttpServlet {
             }
             else{
                 usr.addUser();
-                request.setAttribute("message", "Estas registrado ! "
-                        + "Ahora, puedes iniciar session");
+
                 request.getRequestDispatcher("/login.jsp").forward(request, response); 
             }
             response.sendRedirect("registroUsu.jsp");
         }
-    }
-    
-    private Usuario logInUser(String username, String password) {
-        
-        Connection connection = JdbcDerbyConnection.ConexionDB();
-        
-        String sql = "select * from users where username = ? and password= ?";
- 
-        try (PreparedStatement pstmt = connection.prepareStatement(sql)) {
-            pstmt.setString(1, username);
-            pstmt.setString(2, password);
-            ResultSet rs = pstmt.executeQuery();
-            
-            if (rs.next()) {
-                
-                Usuario user = new Usuario();
-                
-                user.setEmail(rs.getString("email"));
-                user.setNombre(rs.getString("name"));
-                user.setApellidos(rs.getString("surname"));
-                user.setNombreUsuario(rs.getString("username"));
-                user.setContrasena(rs.getString("password"));
-                
-                pstmt.close();
-                return user;
-            }
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-        }
-        
-        
-        return null;
     }    
     
     /**
