@@ -42,7 +42,7 @@ public class Video {
         this.id = id;
         this.title = title;
         this.author = author;
-        //this.date = Date.valueOf(LocalDate.MAX);
+        this.date = Date.valueOf(LocalDate.MAX);
         this.duration = Time.valueOf(LocalTime.MIN);
         this.reproductions = reproductions;
         this.description = description;

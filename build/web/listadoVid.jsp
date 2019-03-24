@@ -24,6 +24,7 @@
                   <th>ID</th>
                   <th>Titulo</th>
                   <th>Autor</th>
+                  <th>Fecha de creacion</th>
                   <th>Duracion</th>
                   <th>Reproducciones</th>
                   <th>Descripcion</th>
@@ -51,6 +52,7 @@
                 <TD><%=rs.getInt(1)%></TD>
                 <TD><%=rs.getString(2)%></TD>
                 <TD><%=rs.getString(3)%></TD>
+                <TD><%=rs.getDate(8)%></TD>
                 <TD><%=rs.getTime(4)%></TD>
                 <TD><%=rs.getInt(5)%></TD>
                 <TD><%=rs.getString(6)%></TD>
