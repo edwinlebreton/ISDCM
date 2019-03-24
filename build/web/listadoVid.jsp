@@ -33,6 +33,8 @@
             </table>
           </div>
             <%
+                if(session.getAttribute("userSession")==null)
+                    response.sendRedirect("login.jsp");
             try {
                 Connection connection = JdbcDerbyConnection.ConexionDB();
                 String sql = "select * from VIDEOS";
@@ -73,6 +75,5 @@
             </div>
             </font>
         <button type="submit" name="action" value="registerNewVid" onclick="parent.location='registroVid.jsp'" >Añadir nueva video</button>    
-        
     </body>
 </html>

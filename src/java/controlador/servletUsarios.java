@@ -22,6 +22,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import modelo.Usuario;
 
 /**
@@ -65,10 +66,11 @@ public class servletUsarios extends HttpServlet {
             String message = null;
             System.out.println(username+" "+password);
             Usuario usr = new Usuario(username, password);
-            
             if(usr.exists()){
                     message="success";
                     System.out.println(message);
+                    HttpSession session = request.getSession(true); 
+                    session.setAttribute("userSession", usr);
                     request.getRequestDispatcher("listadoVid.jsp").forward(request, response); 
             }
             else{

@@ -37,8 +37,10 @@
     </form>
   </div>
 </div>
-
-
+<%
+if(session.getAttribute("userSession")==null)
+                    response.sendRedirect("login.jsp");
+%>
 </body>
 
 </html>
