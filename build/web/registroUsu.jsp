@@ -25,13 +25,21 @@
   <div class="login-page">
   <div class="form">
     <form class="login-form" action="servletUsarios">
-      <input type="text" placeholder="Nombre" class="form-control" name="name" >
-      <input type="text" placeholder="Apellidos" class="form-control" name="surname">
-      <input type="email" placeholder="Email" class="form-control" name="email">
-      <input type="text" placeholder="Nombre de usuario" class="form-control" name="username">
-      <input type="password" placeholder="Contraseña" class="form-control" name="password">
-      <input type="password" placeholder="Repetir contraseña" class="form-control" name="repeatPassword">
-      <button type="submit" name="action" value="Login">Registrar usuario</button>
+      <h3 align="center">NUVEO USUARIO</h3>
+      <input type="text" required='required' placeholder="Nombre" class="form-control" name="name" >
+      <input type="text" required='required' placeholder="Apellidos" class="form-control" name="surname">
+      <input type="email" required='required' placeholder="Email" class="form-control" name="email">
+      <input type="text" required='required' placeholder="Nombre de usuario" class="form-control" name="username">
+      <input type="password" required='required' placeholder="Contraseña" class="form-control" name="password">
+      <input type="password" required='required' placeholder="Repetir contraseña" class="form-control" name="repeatPassword">
+      <%
+        if(request.getAttribute("message") != null && request.getAttribute("message") != ""){
+      %>
+        <p style="color:red"> ${message}</p>
+      <%
+        }
+      %>
+      <button type="submit" name="action" value="Registrar">Registrar usuario</button>
       <p class="message">¿Ya registrado? <a href="login.jsp">Iniciar Sesión</a></p>
     </form>
   </div>

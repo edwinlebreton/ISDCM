@@ -44,6 +44,35 @@ public class Usuario {
         this.password = password;
     }
     
+    public boolean userNameExists() {
+        
+        Connection connection = JdbcDerbyConnection.ConexionDB();
+        
+        String sql = "select * from users where username = ?";
+ 
+        try (PreparedStatement pstmt = connection.prepareStatement(sql)) {
+            pstmt.setString(1, this.username);
+            ResultSet rs = pstmt.executeQuery();
+            boolean check = false;
+            if(rs.next()){
+                check=true;
+                /*Usuario user = new Usuario();
+                
+                user.setEmail(rs.getString("email"));
+                user.setNombre(rs.getString("name"));
+                user.setApellidos(rs.getString("surname"));
+                user.setNombreUsuario(rs.getString("username"));
+                user.setContrasena(rs.getString("password"));
+                */  
+            }
+            pstmt.close();
+            return check;
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        } 
+        return false;
+    }
+    
     public boolean exists() {
         
         Connection connection = JdbcDerbyConnection.ConexionDB();

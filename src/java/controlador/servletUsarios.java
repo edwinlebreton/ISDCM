@@ -60,24 +60,26 @@ public class servletUsarios extends HttpServlet {
             throws ServletException, IOException {
         processRequest(request, response);
         String action = request.getParameter("action");
+        String message = null;
         if("Login".equals(action)){
             String username = request.getParameter("username");
             String password = request.getParameter("password");
-            String message = null;
             System.out.println(username+" "+password);
             Usuario usr = new Usuario(username, password);
             if(usr.exists()){
-                    message="success";
-                    System.out.println(message);
                     HttpSession session = request.getSession(true); 
                     session.setAttribute("userSession", usr);
+                    message= "Inicio de sesión correcto. ¡Bienvenido!";
+                    request.setAttribute("message", message);
                     request.getRequestDispatcher("listadoVid.jsp").forward(request, response); 
+                    message=null;                   
             }
             else{
-                   message="fail";
-                   System.out.println(message);
-                   request.setAttribute("message", message);
-                   request.getRequestDispatcher("/login.jsp").forward(request, response); 
+                    message="Usuario o contraseña incorrecto";
+                    request.setAttribute("message", message);
+                    request.getRequestDispatcher("/login.jsp").forward(request, response); 
+                    message=null;
+                   
             }
         }
         else if("Registrar".equals(action)){
@@ -88,22 +90,24 @@ public class servletUsarios extends HttpServlet {
             String password = request.getParameter("password");
             String repeatPassword = request.getParameter("repeatPassword");
             Usuario usr = new Usuario(username, name, surname, email, password);
-            if(name.equals("")|| surname.equals("") || email.equals("")
-                    || username.equals("") || password.equals("") 
-                    || repeatPassword.equals("")){
-                request.setAttribute("message", "missing fields");
-                request.getRequestDispatcher("/registroUsu.jsp").forward(request, response);
-            }
             if(!password.equals(repeatPassword)){
-                request.setAttribute("message", "wrong password");
+                message="Contraseñas diferentes";
+                request.setAttribute("message", message);
                 request.getRequestDispatcher("/registroUsu.jsp").forward(request, response); 
+                message=null;
+            }
+            else if(usr.userNameExists()){
+                message= "Este nombre de usuario ya existe";
+                request.setAttribute("message", message);
+                request.getRequestDispatcher("/registroUsu.jsp").forward(request, response); 
+                message=null;
             }
             else{
                 usr.addUser();
 
                 request.getRequestDispatcher("/login.jsp").forward(request, response); 
             }
-            response.sendRedirect("registroUsu.jsp");
+            //response.sendRedirect("registroUsu.jsp");
         }
     }    
     

@@ -16,6 +16,17 @@
         <link rel="stylesheet" href="css/table.css">
     </head>
     <body>
+            <%
+            if(session.getAttribute("userSession")==null)
+                    response.sendRedirect("login.jsp");
+            %>
+            <%
+                if(request.getAttribute("message") != null && request.getAttribute("message") != ""){
+            %>
+                <p style="color:white"> ${message}</p>
+            <%
+                }
+            %>
             <h1>Lista de Videos</h1>
             <div class="tbl-header">
             <table cellpadding="0" cellspacing="0" border="0">
@@ -34,8 +45,6 @@
             </table>
           </div>
             <%
-                if(session.getAttribute("userSession")==null)
-                    response.sendRedirect("login.jsp");
             try {
                 Connection connection = JdbcDerbyConnection.ConexionDB();
                 String sql = "select * from VIDEOS";

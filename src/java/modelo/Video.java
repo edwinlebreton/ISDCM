@@ -47,6 +47,26 @@ public class Video {
         this.format = format;
     }
     
+    public boolean alreadyExists(){
+        Connection connection = JdbcDerbyConnection.ConexionDB();
+        
+        String sql = "select * from videos where titulo = ?";
+ 
+        try (PreparedStatement pstmt = connection.prepareStatement(sql)) {
+            pstmt.setString(1, this.title);
+            ResultSet rs = pstmt.executeQuery();
+            boolean check = false;
+            if(rs.next()){
+                check=true;
+            }
+            pstmt.close();
+            return check;
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        } 
+        return false;
+    }
+    
     public boolean addVideo(){
         Connection connection = JdbcDerbyConnection.ConexionDB();
         
