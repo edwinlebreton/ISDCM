@@ -9,6 +9,8 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Date;
 import java.sql.Time;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -55,12 +57,14 @@ public class servletRegistroVid extends HttpServlet {
             int id = Integer.parseInt(request.getParameter("id"));
             String title = request.getParameter("title");
             String author = request.getParameter("author");
-        //Date date = request.getParameter("date");
-        //Time duration = request.getParameter("duration");
+            String dateStr = request.getParameter("date");
+            Date date = Date.valueOf (dateStr);
+            String timeStr = request.getParameter("duration");
+            Time duration = Time.valueOf(timeStr);
             int reproductions = Integer.parseInt(request.getParameter("reproductions"));
             String description = request.getParameter("description");
             String format = request.getParameter("format");
-            Video video = new Video(id, title, author, reproductions, description, format);
+            Video video = new Video(id, title, author, date, duration, reproductions, description, format);
             video.addVideo();
             request.getRequestDispatcher("/listadoVid.jsp").forward(request, response); 
         }

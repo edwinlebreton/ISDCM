@@ -28,7 +28,8 @@
       <input type="number" placeholder="id" name="id" >
       <input type="text" placeholder="Titulo" name="title">
       <input type="text" placeholder="Autor" name="author">
-      <input type="time" placeholder="Duracion" name="duration">
+      <input type="date" placeholder="Fecha de creacion" name="date">
+      <input type="time" step="1" placeholder="Duracion" name="duration">
       <input type="number" placeholder="Reproducciones" name="reproductions">
       <input type="text" placeholder="Descripcion" name="description">
       <input type="text" placeholder="Formato" name="format">
@@ -36,7 +37,6 @@
       <p class="message"><a href="listadoVid.jsp">Volver a listado de video</a></p>
     </form>
   </div>
-</div>
 <%
 if(session.getAttribute("userSession")==null)
                     response.sendRedirect("login.jsp");
