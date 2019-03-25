@@ -26,11 +26,11 @@
   <div class="form">
     <form class="login-form" action="servletUsarios">
       <h3 align="center">NUVEO USUARIO</h3>
-      <input type="text" required='required' placeholder="Nombre" class="form-control" name="name" >
-      <input type="text" required='required' placeholder="Apellidos" class="form-control" name="surname">
-      <input type="email" required='required' placeholder="Email" class="form-control" name="email">
-      <input type="text" required='required' placeholder="Nombre de usuario" class="form-control" name="username">
-      <input type="password" required='required' placeholder="Contraseña" class="form-control" name="password">
+      <input type="text" maxlength="30" required='required' placeholder="Nombre" class="form-control" name="name" >
+      <input type="text" maxlength="30" required='required' placeholder="Apellidos" class="form-control" name="surname">
+      <input type="email" maxlength="50" required='required' placeholder="Email" class="form-control" name="email">
+      <input type="text" maxlength="20" required='required' placeholder="Nombre de usuario" class="form-control" name="username">
+      <input type="password" maxlength="20" required='required' placeholder="Contraseña" class="form-control" name="password">
       <input type="password" required='required' placeholder="Repetir contraseña" class="form-control" name="repeatPassword">
       <%
         if(request.getAttribute("message") != null && request.getAttribute("message") != ""){

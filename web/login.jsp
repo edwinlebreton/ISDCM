@@ -25,13 +25,20 @@
   <div class="form">
     <form name="login_form" class="login-form" action="servletUsarios">
     <h1 align="center">ISDCM Videos</h1>
-      <input type="text" required='required' placeholder="Nombre de usuario"  name="username" >
-      <input type="password" required='required' placeholder="Contraseña" name="password">
+      <input type="text" maxlength="30" required='required' placeholder="Nombre de usuario"  name="username" >
+      <input type="password" maxlength="30" required='required' placeholder="Contraseña" name="password">
       <%
         if(request.getAttribute("message") != null && request.getAttribute("message") != ""){
+            if(request.getAttribute("registerIsDone")==null){
       %>
             <p style="color:red"> ${message}</p>
       <%
+            }
+            else{
+      %>
+                <p style="color:green"> ${message}</p>
+      <%
+          }
         }
       %>
       <button type="submit" name="action" value="Login">Iniciar Sesión</button>

@@ -104,7 +104,10 @@ public class servletUsarios extends HttpServlet {
             }
             else{
                 usr.addUser();
-
+                boolean registerIsDone=true;
+                message= "¡Registro hecho! Ahora puede iniciar sesión";
+                request.setAttribute("message", message);
+                request.setAttribute("registerIsDone", registerIsDone);
                 request.getRequestDispatcher("/login.jsp").forward(request, response); 
             }
             //response.sendRedirect("registroUsu.jsp");
