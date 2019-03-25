@@ -12,7 +12,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Lista de Videos</title>
+        <title>ISDCM Videos</title>
         <link rel="stylesheet" href="css/table.css">
     </head>
     <body>
@@ -27,7 +27,14 @@
             <%
                 }
             %>
-            <h1>Lista de Videos</h1>
+            <form class="login-form" action="servletRegistroVid">
+                <p align="right">
+                            <button align="right" type="submit" name="action" value="close" onclick="parent.location='registroVid.jsp'">Cerrar sesión</button>
+                </p>
+            </form>
+            <p align="right">
+                <h1>Lista de Videos</h1>
+            </p>
             <div class="tbl-header">
             <table cellpadding="0" cellspacing="0" border="0">
               <thead>
@@ -85,6 +92,8 @@
             </tbody>
             </div>
             </font>
-        <button type="submit" name="action" value="registerNewVid" onclick="parent.location='registroVid.jsp'" >Añadir nueva video</button>    
+        <div class="form">
+                <button type="submit" name="action" value="registerNewVid" onclick="parent.location='registroVid.jsp'" >Añadir nueva video</button>    
+        </div>
     </body>
 </html>

@@ -11,7 +11,7 @@
 
 <head>
   <meta charset="UTF-8">
-  <title>Register video</title>
+  <title>ISDCM Videos</title>
   
   
       <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
@@ -21,7 +21,11 @@
 </head>
 
 <body>
-
+    <form class="login-form" action="servletRegistroVid">
+        <p align="right">
+                    <button align="right" type="submit" name="action" value="close">Cerrar sesión</button>
+        </p>
+    </form>
   <div class="form">
     <form class="login-form" action="servletRegistroVid">
       <h1 align="center">Registrar video</h1>

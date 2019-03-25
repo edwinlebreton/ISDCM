@@ -8,15 +8,7 @@ package controlador;
  * and open the template in the editor.
  */
 
-import conexion.JdbcDerbyConnection;
-import conexion.LoginService;
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -59,58 +51,61 @@ public class servletUsarios extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
-        String action = request.getParameter("action");
-        String message = null;
-        if("Login".equals(action)){
-            String username = request.getParameter("username");
-            String password = request.getParameter("password");
-            System.out.println(username+" "+password);
-            Usuario usr = new Usuario(username, password);
-            if(usr.exists()){
-                    HttpSession session = request.getSession(true); 
-                    session.setAttribute("userSession", usr);
-                    message= "Inicio de sesión correcto. ¡Bienvenido!";
-                    request.setAttribute("message", message);
-                    request.getRequestDispatcher("listadoVid.jsp").forward(request, response); 
-                    message=null;                   
+        try{
+            String action = request.getParameter("action");
+            String message = null;
+            if("Login".equals(action)){
+                String username = request.getParameter("username");
+                String password = request.getParameter("password");
+                System.out.println(username+" "+password);
+                Usuario usr = new Usuario(username, password);
+                if(usr.exists()){
+                        HttpSession session = request.getSession(true); 
+                        session.setAttribute("userSession", usr);
+                        message= "Inicio de sesión correcto. ¡Bienvenido!";
+                        request.setAttribute("message", message);
+                        request.getRequestDispatcher("listadoVid.jsp").forward(request, response); 
+                        message=null;                   
+                }
+                else{
+                        message="Usuario o contraseña incorrecto";
+                        request.setAttribute("message", message);
+                        request.getRequestDispatcher("/login.jsp").forward(request, response); 
+                        message=null;
+
+                }
             }
-            else{
-                    message="Usuario o contraseña incorrecto";
+            else if("Registrar".equals(action)){
+                String name = request.getParameter("name");
+                String surname = request.getParameter("surname");
+                String email = request.getParameter("email");
+                String username = request.getParameter("username");
+                String password = request.getParameter("password");
+                String repeatPassword = request.getParameter("repeatPassword");
+                Usuario usr = new Usuario(username, name, surname, email, password);
+                if(!password.equals(repeatPassword)){
+                    message="Contraseñas diferentes";
                     request.setAttribute("message", message);
-                    request.getRequestDispatcher("/login.jsp").forward(request, response); 
+                    request.getRequestDispatcher("/registroUsu.jsp").forward(request, response); 
                     message=null;
-                   
+                }
+                else if(usr.userNameExists()){
+                    message= "Este nombre de usuario ya existe";
+                    request.setAttribute("message", message);
+                    request.getRequestDispatcher("/registroUsu.jsp").forward(request, response); 
+                    message=null;
+                }
+                else{
+                    usr.addUser();
+                    boolean registerIsDone=true;
+                    message= "¡Registro hecho! Ahora puede iniciar sesión";
+                    request.setAttribute("message", message);
+                    request.setAttribute("registerIsDone", registerIsDone);
+                    request.getRequestDispatcher("/login.jsp").forward(request, response); 
+                }
             }
-        }
-        else if("Registrar".equals(action)){
-            String name = request.getParameter("name");
-            String surname = request.getParameter("surname");
-            String email = request.getParameter("email");
-            String username = request.getParameter("username");
-            String password = request.getParameter("password");
-            String repeatPassword = request.getParameter("repeatPassword");
-            Usuario usr = new Usuario(username, name, surname, email, password);
-            if(!password.equals(repeatPassword)){
-                message="Contraseñas diferentes";
-                request.setAttribute("message", message);
-                request.getRequestDispatcher("/registroUsu.jsp").forward(request, response); 
-                message=null;
-            }
-            else if(usr.userNameExists()){
-                message= "Este nombre de usuario ya existe";
-                request.setAttribute("message", message);
-                request.getRequestDispatcher("/registroUsu.jsp").forward(request, response); 
-                message=null;
-            }
-            else{
-                usr.addUser();
-                boolean registerIsDone=true;
-                message= "¡Registro hecho! Ahora puede iniciar sesión";
-                request.setAttribute("message", message);
-                request.setAttribute("registerIsDone", registerIsDone);
-                request.getRequestDispatcher("/login.jsp").forward(request, response); 
-            }
-            //response.sendRedirect("registroUsu.jsp");
+        } catch (Exception e) {
+            throw new ServletException(e);
         }
     }    
     
@@ -135,7 +130,7 @@ public class servletUsarios extends HttpServlet {
      */
     @Override
     public String getServletInfo() {
-        return "Short description";
+        return "servlet for user account management";
     }// </editor-fold>
 
 }
