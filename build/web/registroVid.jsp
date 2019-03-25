@@ -39,7 +39,6 @@
           }
         }
       %>
-      <input type="number" required='required' placeholder="id" name="id" >
       <input type="text" maxlength="100" required='required' placeholder="Titulo" name="title">
       <input type="text" maxlength="100" required='required' placeholder="Autor" name="author">
       <input type="date" required='required' placeholder="Fecha de creacion" name="date">

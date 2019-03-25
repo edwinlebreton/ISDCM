@@ -58,7 +58,6 @@ public class servletRegistroVid extends HttpServlet {
         if(session.getAttribute("userSession")==null)
                     response.sendRedirect("login.jsp");
         else if("registrarVid".equals(action)){
-                String ident = request.getParameter("id");
                 String title = request.getParameter("title");
                 String author = request.getParameter("author");
                 String dateStr = request.getParameter("date");
@@ -66,11 +65,10 @@ public class servletRegistroVid extends HttpServlet {
                 String reprod = request.getParameter("reproductions");
                 String description = request.getParameter("description");
                 String format = request.getParameter("format");
-                int id = Integer.parseInt(ident);
                 int reproductions = Integer.parseInt(reprod);
                 Date date = Date.valueOf (dateStr);
                 Time duration = Time.valueOf(timeStr);
-                Video video = new Video(id, title, author, date, duration, reproductions, description, format);
+                Video video = new Video(title, author, date, duration, reproductions, description, format);
                 if(video.alreadyExists()){
                     String message= "Este video ya existe";
                     boolean videoAlreadyExists = true;

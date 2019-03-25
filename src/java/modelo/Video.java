@@ -15,6 +15,7 @@ import java.time.Instant;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;
+import java.util.Random;
 
 /**
  *
@@ -33,11 +34,11 @@ public class Video {
     public Video() {
     }
     
-    public Video(int id, String title, String author, Date date, Time duration,
+    public Video(String title, String author, Date date, Time duration,
             int reproductions, String description,
             String format) {
         
-        this.id = id;
+        this.id = generateRandom();
         this.title = title;
         this.author = author;
         this.date = date;
@@ -45,6 +46,32 @@ public class Video {
         this.reproductions = reproductions;
         this.description = description;
         this.format = format;
+    }
+    
+    private int generateRandom(){
+        Random rand = new Random();
+        int n = rand.nextInt(50000);
+        while(randomExists(n)){
+            n=rand.nextInt(50000);
+        }
+        return n;
+    }
+    
+    private boolean randomExists(int n){
+        Connection connection = JdbcDerbyConnection.ConexionDB();
+        
+        String sql = "select * from videos where id = ?";
+        try (PreparedStatement pstmt = connection.prepareStatement(sql)) {
+            pstmt.setString(1, Integer.toString(n));
+            ResultSet rs = pstmt.executeQuery();
+            if(rs.next()){
+                return true;
+            }
+            pstmt.close();
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        } 
+        return false;
     }
     
     public boolean alreadyExists(){
