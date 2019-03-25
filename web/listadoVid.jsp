@@ -54,7 +54,7 @@
             <%
             try {
                 Connection connection = JdbcDerbyConnection.ConexionDB();
-                String sql = "select * from VIDEOS";
+                String sql = "select * from VIDEOS ORDER BY id";
                 PreparedStatement statement = connection.prepareStatement(sql);
                 ResultSet rs = statement.executeQuery();
                 %>
