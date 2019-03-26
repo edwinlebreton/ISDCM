@@ -90,7 +90,7 @@ public class servletUsarios extends HttpServlet {
                     message=null;
                 }
                 else if(usr.userNameExists()){
-                    message= "Este nombre de usuario ya existe";
+                    message= "Nombre de usuario o correo electrónico ya existe";
                     request.setAttribute("message", message);
                     request.getRequestDispatcher("/registroUsu.jsp").forward(request, response); 
                     message=null;

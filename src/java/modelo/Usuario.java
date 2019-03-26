@@ -48,10 +48,11 @@ public class Usuario {
         
         Connection connection = JdbcDerbyConnection.ConexionDB();
         
-        String sql = "select * from users where username = ?";
+        String sql = "select * from users where username = ? or email = ?";
  
         try (PreparedStatement pstmt = connection.prepareStatement(sql)) {
             pstmt.setString(1, this.username);
+            pstmt.setString(2, this.email);
             ResultSet rs = pstmt.executeQuery();
             boolean check = false;
             if(rs.next()){
@@ -77,11 +78,12 @@ public class Usuario {
         
         Connection connection = JdbcDerbyConnection.ConexionDB();
         
-        String sql = "select * from users where username = ? and password= ?";
+        String sql = "select * from users where (username = ? or email = ?) and password = ?";
  
         try (PreparedStatement pstmt = connection.prepareStatement(sql)) {
             pstmt.setString(1, this.username);
-            pstmt.setString(2, this.password);
+            pstmt.setString(2, this.username);
+            pstmt.setString(3, this.password);
             ResultSet rs = pstmt.executeQuery();
             boolean check = false;
             if(rs.next()){
