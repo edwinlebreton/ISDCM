@@ -47,7 +47,7 @@
       <input type="text" maxlength="100" required='required' placeholder="Autor" name="author">
       <input type="date" required='required' placeholder="Fecha de creacion" name="date">
       <input type="time" required='required' step="1" placeholder="Duracion" name="duration">
-      <input type="number" required='required' placeholder="Reproducciones" name="reproductions">
+      <input type="number" required='required' min="0" placeholder="Reproducciones" name="reproductions">
       <input type="text" maxlength="255" required='required' placeholder="Descripcion" name="description">
       <input maxlength="5" type="text" required='required' placeholder="Formato" name="format">
       <button type="submit" name="action" value="registrarVid">Registrar video</button>
